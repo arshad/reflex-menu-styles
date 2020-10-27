@@ -7,18 +7,30 @@ export const HeaderBlock = ({ ...props }) => {
     <Header
       position={["sticky", "relative"]}
       top="0"
-      bg="background"
+      bg="black"
+      color="white"
       zIndex="1000"
       {...props}
     >
       <Container>
         <Flexbox d={["none", "flex"]} justifyContent="space-between" py="1">
-          <Branding />
+          <Branding color="white" />
           <NavMenu
             name={navName}
             gap={[0, 8, 14]}
             ml={["auto", "auto"]}
             mr="null|10"
+            sx={{
+              "> li": {
+                "> a, > [aria-current='page']": {
+                  color: "white",
+                  "&:hover": {
+                    color: "white",
+                    textDecoration: "underline",
+                  },
+                },
+              },
+            }}
           />
           <ModeToggle ml="0" />
         </Flexbox>
@@ -36,13 +48,13 @@ export const HeaderBlock = ({ ...props }) => {
           visibility={showMenu ? "hidden" : "visible"}
           transition="all .15s ease-in"
         >
-          <Branding />
+          <Branding color="white" />
           <Button
             variant="link"
             outline="none"
             onClick={() => setShowMenu(true)}
           >
-            <Icon name="menu" size="7" />
+            <Icon name="menu" size="7" color="white" />
           </Button>
         </Flexbox>
         <Div
@@ -66,7 +78,7 @@ export const HeaderBlock = ({ ...props }) => {
           maxHeight="95vh"
         >
           <Flexbox justifyContent="space-between" w="full" py="2" px="0">
-            <Branding />
+            <Branding color="text" />
             <Button variant="link" onClick={() => setShowMenu(false)} mr={-3}>
               <Icon name="x" size="6" />
             </Button>
@@ -81,10 +93,10 @@ export const HeaderBlock = ({ ...props }) => {
   )
 }
 
-export const Branding = () => {
+export const Branding = ({ ...props }) => {
   const { title } = useSiteMetadata()
   return (
-    <A href="/" fontSize="3xl" fontWeight="semibold" color="text">
+    <A href="/" fontSize="3xl" fontWeight="semibold" {...props}>
       {title}
     </A>
   )
